@@ -208,7 +208,7 @@ const Navbar = () => {
               <Link
                 key={link.name}
                 to={link.path}
-                className={`text-2xl font-bold font-heading transition-colors duration-300 text-right ${location.pathname === link.path
+                className={`text-2xl font-bold font-heading transition-colors duration-300 text-right [text-shadow:_0_2px_10px_rgba(255,255,255,0.8),_0_0_20px_rgba(255,255,255,0.8)] ${location.pathname === link.path
                   ? 'text-accent'
                   : 'text-text-primary hover:text-accent'
                   }`}
