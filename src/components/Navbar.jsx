@@ -92,9 +92,11 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 w-full z-50 transition-all duration-500 border-b ${scrolled
-        ? 'bg-[#CED2E5]/90 backdrop-blur-md border-slate-400/20 py-4 shadow-sm'
-        : 'bg-[#CED2E5]/30 backdrop-blur-sm border-transparent py-6'
+      className={`fixed top-0 w-full z-50 transition-all duration-500 border-b ${isOpen
+        ? 'bg-transparent border-transparent py-6'
+        : scrolled
+          ? 'bg-[#CED2E5]/90 backdrop-blur-md border-slate-400/20 py-4 shadow-sm'
+          : 'bg-[#CED2E5]/30 backdrop-blur-sm border-transparent py-6'
         }`}
     >
       <div className="w-full px-4 md:px-12 flex justify-between items-center">
@@ -161,7 +163,7 @@ const Navbar = () => {
 
         {/* Mobile Menu Button */}
         <motion.button
-          className="lg:hidden relative z-50 p-2 text-text-primary hover:text-accent focus:outline-none rounded-full hover:bg-slate-100 transition-colors"
+          className="lg:hidden relative z-[60] p-2 text-text-primary hover:text-accent focus:outline-none bg-transparent transition-colors"
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle menu"
           whileTap={{ scale: 0.9 }}
@@ -192,52 +194,39 @@ const Navbar = () => {
         </motion.button>
       </div>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu Dropdown */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial="closed"
-            animate="open"
-            exit="closed"
-            variants={menuVariants}
-            className="fixed inset-0 z-40 bg-white/95 backdrop-blur-xl md:hidden flex flex-col justify-center items-center"
+            initial={{ opacity: 0, y: -20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+            className="absolute top-[80px] right-4 md:right-12 min-w-[200px] bg-transparent lg:hidden flex flex-col items-end space-y-6"
           >
-            <div className="flex flex-col items-center space-y-8">
-              {navLinks.map((link) => (
-                <motion.div key={link.name} variants={linkVariants}>
-                  <Link
-                    to={link.path}
-                    className={`text-3xl font-bold font-heading transition-colors duration-300 ${location.pathname === link.path
-                      ? 'text-accent'
-                      : 'text-text-primary hover:text-text-secondary'
-                      }`}
-                    onClick={() => setIsOpen(false)}
-                  >
-                    {link.name}
-                  </Link>
-                  {location.pathname === link.path && (
-                    <motion.div
-                      layoutId="mobile-underline"
-                      className="h-1 bg-accent w-12 mx-auto mt-2 rounded-full"
-                    />
-                  )}
-                </motion.div>
-              ))}
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                to={link.path}
+                className={`text-2xl font-bold font-heading transition-colors duration-300 text-right ${location.pathname === link.path
+                  ? 'text-accent'
+                  : 'text-text-primary hover:text-accent'
+                  }`}
+                onClick={() => setIsOpen(false)}
+              >
+                {link.name}
+              </Link>
+            ))}
 
-              <motion.div variants={linkVariants} className="pt-8">
-                <Link
-                  to="/#contact"
-                  className="px-8 py-3 text-lg font-medium text-white bg-accent rounded-full shadow-xl shadow-accent/30 hover:bg-accent-hover transition-colors inline-block"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Connect
-                </Link>
-              </motion.div>
+            <div className="pt-2 w-full flex justify-end">
+              <Link
+                to="/#contact"
+                className="px-6 py-2.5 text-lg font-medium text-white bg-accent rounded-full hover:bg-accent-hover transition-colors shadow-lg shadow-accent/20"
+                onClick={() => setIsOpen(false)}
+              >
+                Connect
+              </Link>
             </div>
-
-            {/* Background decorative blobs */}
-            <div className="absolute -z-10 top-20 left-10 w-64 h-64 bg-accent/5 rounded-full blur-3xl filter" />
-            <div className="absolute -z-10 bottom-20 right-10 w-72 h-72 bg-blue-400/10 rounded-full blur-3xl filter" />
           </motion.div>
         )}
       </AnimatePresence>
