@@ -97,11 +97,11 @@ const Navbar = () => {
         : 'bg-[#CED2E5]/30 backdrop-blur-sm border-transparent py-6'
         }`}
     >
-      <div className="w-full px-6 md:px-12 flex justify-between items-center">
+      <div className="w-full px-4 md:px-12 flex justify-between items-center">
         {/* Logo */}
         <Link
           to="/"
-          className="relative z-50 text-3xl font-bold font-heading text-text-primary tracking-tight group"
+          className="relative z-50 text-2xl md:text-3xl font-bold font-heading text-text-primary tracking-tight group"
           onClick={() => setIsOpen(false)}
         >
           <motion.span
@@ -115,7 +115,7 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center space-x-10">
+        <div className="hidden lg:flex items-center space-x-10">
           {navLinks.map((link, i) => {
             // Simple active state based on scroll-spy since we are always on home now
             const isActive = activeSection === link.id;
@@ -161,7 +161,7 @@ const Navbar = () => {
 
         {/* Mobile Menu Button */}
         <motion.button
-          className="md:hidden relative z-50 p-2 text-text-primary hover:text-accent focus:outline-none rounded-full hover:bg-slate-100 transition-colors"
+          className="lg:hidden relative z-50 p-2 text-text-primary hover:text-accent focus:outline-none rounded-full hover:bg-slate-100 transition-colors"
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle menu"
           whileTap={{ scale: 0.9 }}
