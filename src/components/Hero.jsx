@@ -30,7 +30,7 @@ const Hero = () => {
                             View Projects
                             <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                         </a>
-                        <a href="/Shehzaad's Resume 2.pdf" download className="btn btn-outline flex items-center justify-center gap-2 group">
+                        <a href="/Shehzaad's Resume.pdf" download className="btn btn-outline flex items-center justify-center gap-2 group">
                             Download Resume
                             <Download size={18} className="group-hover:translate-y-1 transition-transform" />
                         </a>
